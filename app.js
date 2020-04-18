@@ -14,7 +14,7 @@ app.post('/', async (req,res) => {
     try {
         const {body} = req;
 
-        console.log(body);
+        // console.log(body);
 
         switch (body.type) {
             case 'confirmation':

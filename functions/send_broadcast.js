@@ -21,7 +21,7 @@ module.exports = async (group_id, post_link, action) => {
 
         request(options, function (error, response) {
             if (error) throw new Error(error);
-            console.log(response.body);
+            // console.log(response.body);
             console.log(group_id, 'рассылка отправлена. Статус', JSON.parse(response.body).response.status, post_link);
         });
     }

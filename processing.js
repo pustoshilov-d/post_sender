@@ -8,7 +8,7 @@ module.exports = async (group_id, post_type_own, post_link, post_text, actions) 
             try {
                 if (actions.hasOwnProperty(num_action)) {
                     let action = actions[num_action];
-                    console.log(group_id, 'работаем с действием', action);
+                    console.log(group_id, 'работаем с действием', action.id);
 
                     //проверка на # если нужен
                     if (post_type_own === 'official') {
