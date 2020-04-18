@@ -1,0 +1,12 @@
+{
+  "ignore": ["node_modules"],
+  "env": {
+    "NODE_ENV":"development",
+    "PORT": 3000,
+    "TEST_FLAG": "1",
+
+    "DATABASE_URL": "postgres://rhwrvpylrywnwg:5843dde7efd98d3047e21ba15a207c8ed9b4defe24469efae3f9ae0e52200a53@ec2-54-246-89-234.eu-west-1.compute.amazonaws.com:5432/d4ao0q508pj19s"
+  },
+  "ext": ".js,.json",
+  "watch": ",/"
+}
