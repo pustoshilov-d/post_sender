@@ -1,10 +1,11 @@
 const check_history = require('./check_history.js');
 const add_history = require('./add_history.js');
+const request = require('request');
 
 module.exports = async (group_id, post_link, action) => {
     try {
         if (await check_history(action.from_group, post_link, action.to_chat_list, action.to_group, action.action_type)){
-            let request = require('request');
+
             let options = {
                 'method': 'POST',
                 'url': 'https://broadcast.vkforms.ru/api/v2/broadcast?token=' + action.to_token,
@@ -22,7 +23,7 @@ module.exports = async (group_id, post_link, action) => {
                 })
             };
 
-            request(options, async function (error, response) {
+            await request(options, async function (error, response) {
                 if (error) throw new Error(error);
                 // console.log(response.body);
 
