@@ -27,7 +27,7 @@ module.exports = async (group_id, post_link, action) => {
                 if (error) throw new Error(error);
                 // console.log(response.body);
 
-                await add_history(action.from_group,post_link,chat_id,action.to_group, action.action_type);
+                await add_history(action.from_group,post_link,action.to_chat_list,action.to_group, action.action_type);
                 console.log(group_id, 'рассылка отправлена. Статус', JSON.parse(response.body).response.status, post_link);
             });
 
