@@ -4,7 +4,7 @@ const add_history = require('./add_history.js');
 
 module.exports = async (post_link,chat_id,action) => {
     try {
-        if (await check_history(action.from_group,post_link,chat_id,action.to_group)){
+        if (await check_history(action.from_group,post_link,chat_id,action.to_group, action.action_type)){
 
             let res = await api('messages.send', {
                 peer_id: chat_id,
@@ -17,7 +17,7 @@ module.exports = async (post_link,chat_id,action) => {
 
 
             if (res.error === undefined){
-                await add_history(action.from_group,post_link,chat_id,action.to_group);
+                await add_history(action.from_group,post_link,chat_id,action.to_group, action.action_type);
                 console.log(action.from_group, 'пост отправлен', post_link, action.to_group, chat_id, res);
                 return true;
             }
@@ -33,6 +33,10 @@ module.exports = async (post_link,chat_id,action) => {
                 console.log(action.from_group, 'пост не отправлен. Ошибка 917. Нет такого чата', post_link, action.to_group, chat_id);
                 return false;
             }
+        }
+        else{
+            console.log(action.from_group, 'пост сюда уже был отправлен', post_link, action.to_group, chat_id);
+            return true;
         }
     }
 
