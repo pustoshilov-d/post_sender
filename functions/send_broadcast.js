@@ -33,8 +33,7 @@ module.exports = async (group_id, post_link, action) => {
 
         }
         else{
-            console.log(action.from_group, 'рассылка поста уже была', post_link, action.to_group, chat_id);
-            return true;
+            console.log(action.from_group, 'рассылка поста уже была', post_link, action.to_group, action.to_chat_list);
             }
     }
     catch (e) {
