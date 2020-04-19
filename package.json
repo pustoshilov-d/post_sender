@@ -13,12 +13,11 @@
   "dependencies": {
     "body-parser": "latest",
     "express": "^4.17.1",
-    "form-data": "^3.0.0",
     "node-postgres": "^0.1.4",
     "nodemon": "^2.0.3",
     "pg": "^8.0.2",
     "vk-easy": "^1.4.1",
-    "xmlhttprequest": "^1.8.0"
+    "request": "^2.88.2"
   },
   "devDependencies": {
     "request": "^2.88.2"
