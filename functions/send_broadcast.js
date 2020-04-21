@@ -8,7 +8,7 @@ module.exports = async (group_id, post_link, action) => {
         if (await check_history(action.from_group, post_link, action.to_chat_list, action.to_group, action.action_type)){
 
             let options = {
-                'method': 'POST1',
+                'method': 'POST',
                 'url': 'https://broadcast.vkforms.ru/api/v2/broadcast?token=' + action.to_token,
                 'headers': {
                     'Content-Type': 'application/json'
@@ -25,20 +25,10 @@ module.exports = async (group_id, post_link, action) => {
             };
 
             const requestPromise = util.promisify(request);
-            let error, response = await requestPromise(options);
+            let response = await requestPromise(options);
 
-            console.log("1 ПАРАМЕТР ", error);
-            console.log('2 ПАРАМЕТР',response);
-
-
-            if (!error){
-                console.log('нет ошибки');
-                await add_history(action.from_group,post_link,action.to_chat_list,action.to_group, action.action_type);
-                console.log(group_id, 'рассылка отправлена. Статус', JSON.parse(response.body).response.status, post_link);
-            }
-            else {
-                console.log(group_id, 'ошибка при рассылке', error);
-            }
+            await add_history(action.from_group,post_link,action.to_chat_list,action.to_group, action.action_type);
+            console.log(group_id, 'рассылка отправлена. Статус', JSON.parse(response.body).response.status, post_link);
 
         }
         else{
