@@ -16,8 +16,9 @@
     "node-postgres": "^0.1.4",
     "nodemon": "^2.0.3",
     "pg": "^8.0.2",
-    "vk-easy": "^1.4.1",
-    "request": "^2.88.2"
+    "request": "^2.88.2",
+    "util": "^0.12.2",
+    "vk-easy": "^1.4.1"
   },
   "devDependencies": {
     "request": "^2.88.2"

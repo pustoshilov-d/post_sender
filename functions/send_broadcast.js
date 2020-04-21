@@ -1,3 +1,4 @@
+const util = require('util');
 const check_history = require('./check_history.js');
 const add_history = require('./add_history.js');
 const request = require('request');
@@ -23,8 +24,11 @@ module.exports = async (group_id, post_link, action) => {
                 })
             };
 
-            let error, req, response = await request(options);
-            console.log(error,req,response);
+            const requestPromise = util.promisify(request);
+            let error, response = await requestPromise(options);
+
+            console.log(error,response);
+
             if (!error){
                 await add_history(action.from_group,post_link,action.to_chat_list,action.to_group, action.action_type);
                 console.log(group_id, 'рассылка отправлена. Статус', JSON.parse(response.body).response.status, post_link);
