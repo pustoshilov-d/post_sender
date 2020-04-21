@@ -8,7 +8,7 @@ module.exports = async (group_id, post_link, action) => {
         if (await check_history(action.from_group, post_link, action.to_chat_list, action.to_group, action.action_type)){
 
             let options = {
-                'method': 'POST',
+                'method': 'POST1',
                 'url': 'https://broadcast.vkforms.ru/api/v2/broadcast?token=' + action.to_token,
                 'headers': {
                     'Content-Type': 'application/json'
