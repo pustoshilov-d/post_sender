@@ -14,8 +14,11 @@ module.exports = async (group_id, post_type_own, post_link, post_text, actions) 
                     if (post_type_own === 'official') {
                         if (action.extra !== null) {
                             if (!post_text.toLowerCase().includes(action.extra.toLowerCase())) {
-                                console.log(group_id, 'осутствует ', action.extra);
+                                console.log(group_id, 'осутствует ', action.extra, post_link);
                                 continue;
+                            }
+                            else {
+                                console.log(group_id, 'пройдена проверка на', action.extra, post_link);
                             }
                         }
                     }
@@ -42,12 +45,12 @@ module.exports = async (group_id, post_type_own, post_link, post_text, actions) 
                 }
             }
             catch (e) {
-                console.log(group_id, 'ошибка', e)
+                console.log(group_id, 'ошибка в processing.js', e)
             }
         }
 
     }
     catch (e) {
-        console.log(group_id, 'ошибка', e)
+        console.log(group_id, 'ошибка в processing.js', e)
     }
 };
