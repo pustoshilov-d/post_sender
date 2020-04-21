@@ -1,14 +1,16 @@
-const get_actions = require('./functions/get_actions.js');
+let keyboard = JSON.stringify({
+    one_time: false,
+    buttons: [
+        [{
+            action: {
+                type: "open_link",
+                link: "https://vk.com/app5748831_-190214743#2523856799",
+                label: "Отписка от рассылки",
+                payload: {action: "subscribe"}
+            },
+            "color": "secondary"
+        }]
+    ]
+});
 
-async function main() {
-    let group_id = 23513715;
-        let post_type_own = 'official';
-    console.log();
-
-    let actions = await get_actions(group_id, post_type_own);
-    console.log(actions)
-
-}
-
-main()
-
+console.log(keyboard);

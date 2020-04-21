@@ -7,22 +7,44 @@ module.exports = async (group_id, post_link, action) => {
     try {
         if (await check_history(action.from_group, post_link, action.to_chat_list, action.to_group, action.action_type)){
 
-            let options = {
-                'method': 'POST',
-                'url': 'https://broadcast.vkforms.ru/api/v2/broadcast?token=' + action.to_token,
-                'headers': {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    "message":
-                        {
-                            "message": action.text,
-                            "attachment": [post_link]
-                        },
-                    "list_ids": [action.to_chat_list],
-                    "run_now": 1
-                })
-            };
+            let options;
+            if (action.keyboard === null) {
+                options = {
+                    'method': 'POST',
+                    'url': 'https://broadcast.vkforms.ru/api/v2/broadcast?token=' + action.to_token,
+                    'headers': {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        "message":
+                            {
+                                "message": action.text,
+                                "attachment": [post_link]
+                            },
+                        "list_ids": [action.to_chat_list],
+                        "run_now": 1
+                    })
+                };
+            }
+            else {
+                options = {
+                    'method': 'POST',
+                    'url': 'https://broadcast.vkforms.ru/api/v2/broadcast?token=' + action.to_token,
+                    'headers': {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        "message":
+                            {
+                                "message": action.text,
+                                "attachment": [post_link],
+                                "keyboard": action.keyboard
+                            },
+                        "list_ids": [action.to_chat_list],
+                        "run_now": 1
+                    })
+                };
+            }
 
             const requestPromise = util.promisify(request);
             let response = await requestPromise(options);
