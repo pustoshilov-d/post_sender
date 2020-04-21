@@ -25,14 +25,14 @@ module.exports = async (group_id, post_link, action) => {
             };
 
             const requestPromise = util.promisify(request);
-            let error, response,response2 = await requestPromise(options);
+            let error, response = await requestPromise(options);
 
             console.log("1 ПАРАМЕТР ", error);
             console.log('2 ПАРАМЕТР',response);
-            console.log('3 ПАРАМЕТР',response2);
 
 
             if (!error){
+                console.log('нет ошибки');
                 await add_history(action.from_group,post_link,action.to_chat_list,action.to_group, action.action_type);
                 console.log(group_id, 'рассылка отправлена. Статус', JSON.parse(response.body).response.status, post_link);
             }
