@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "app": "node app.js",
-    "test": "node test.js"
+    "test": "node psy_sender/test.js"
   },
   "keywords": [],
   "author": "",
