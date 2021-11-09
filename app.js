@@ -47,4 +47,4 @@ app.post('/', async (req,res) => {
     });
 
 
-app.listen(PORT, () => console.log('Hello, word'));
+app.listen(PORT, () => console.log('Hello, word!'));

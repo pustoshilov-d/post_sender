@@ -6,7 +6,7 @@ module.exports = async (post_link,chat_id,action) => {
     try {
         if (await check_history(action.from_group,post_link,chat_id,action.to_group, action.action_type)){
 
-            let res = await api('messages.send', {
+            var res = await api('messages.send', {
                 peer_id: chat_id,
                 random_id:  Math.floor(Math.random()*999999999),
                 message: action.text !== null ? action.text : "",
@@ -15,6 +15,8 @@ module.exports = async (post_link,chat_id,action) => {
                 access_token: action.to_token,
             });
 
+
+            console.log(action.from_group, 'результат', post_link, action.to_group, chat_id, res);
 
             if (res.error === undefined){
                 await add_history(action.from_group,post_link,chat_id,action.to_group, action.action_type);
