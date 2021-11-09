@@ -11,6 +11,6 @@ module.exports = function createClient () {
     })
   }
   catch (e) {
-    console.log('Ошибка в dbConnection.js', e)
+    console.log('Ошибка в dbConnection.js', e);
   }
 };
