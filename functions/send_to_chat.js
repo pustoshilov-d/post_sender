@@ -13,6 +13,7 @@ module.exports = async (post_link,chat_id,action) => {
                 group_id: action.to_group,
                 attachment: post_link,
                 access_token: action.to_token,
+                v: "5.131"
             });
 
 
