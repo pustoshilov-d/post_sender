@@ -1,7 +1,7 @@
 try {
     const express = require('express');
     const bodyParser = require('body-parser');
-    const { PORT, TEST_FLAG } = require('./config');
+    const { PORT, TEST_FLAG, TEST_CONF } = require('./config');
     const app = express();
 
     const processing = require('./processing');
@@ -14,12 +14,11 @@ try {
     app.post('/', async (req, res) => {
         try {
             const { body } = req;
-
             // console.log(body);
 
             switch (body.type) {
                 case 'confirmation':
-                    let conf = await get_conf(body.group_id);
+                    let conf = TEST_FLAG ? TEST_CONF : await get_conf(body.group_id);
                     res.end(conf);
                     break;
 

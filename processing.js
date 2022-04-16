@@ -21,11 +21,11 @@ module.exports = async (group_id, post_type_own, post_link, post_text, actions) 
                     if (post_type_own === 'official') {
                         if (action.extra !== null) {
                             if (!post_text.toLowerCase().includes(action.extra.toLowerCase())) {
-                                console.log(group_id, 'осутствует ', action.extra, post_link);
+                                console.log(group_id, 'осутствует', action.extra, post_link);
                                 continue;
                             }
                             else {
-                                console.log(group_id, 'пройдена проверка на', action.extra, post_link);
+                                console.log(group_id, 'есть', action.extra, post_link);
                             }
                         }
                     }
@@ -41,7 +41,6 @@ module.exports = async (group_id, post_type_own, post_link, post_text, actions) 
                             while (flag) {
                                 if (chat_id !== action.except) {
                                     flag = await send_to_chat(post_link, chat_id, action)
-                                    console.log('flag', flag)
                                     chat_id += 1
                                 }
                             }

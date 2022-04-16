@@ -1,5 +1,5 @@
 const { VK } = require('vk-io');
-const check_history = require('./check_history.js');
+const was_sent = require('./check_history.js');
 const add_history = require('./add_history.js');
 
 module.exports = async (post_link, chat_id, action) => {
@@ -9,7 +9,7 @@ module.exports = async (post_link, chat_id, action) => {
             apiVersion: "5.131",
             apiRequestMode: 'sequential'
         });
-        if (await check_history(action.from_group, post_link, chat_id, action.to_group, action.action_type)) {
+        if (await was_sent(action.from_group, post_link, chat_id, action.to_group, action.action_type)) {
 
             return vk.api.messages.send({
                 peer_id: chat_id,
@@ -18,14 +18,11 @@ module.exports = async (post_link, chat_id, action) => {
                 group_id: action.to_group,
                 attachment: post_link
             }).then(async (res) => {
-                console.log(action.from_group, 'результат', post_link, action.to_group, chat_id, res);
                 await add_history(action.from_group, post_link, chat_id, action.to_group, action.action_type);
                 console.log(action.from_group, 'пост отправлен', post_link, action.to_group, chat_id, res);
                 return true;
             }).catch(async (error) => {
-                console.log('error', error)
-                console.log('error', Object.keys(error))
-                switch (error.error_code) {
+                switch (error.code) {
                     case 945:
                         console.log(action.from_group, 'пост не отправлен. Ошибка 945. Чат закрыт', post_link, action.to_group, chat_id);
                         return true;
@@ -36,14 +33,12 @@ module.exports = async (post_link, chat_id, action) => {
                         console.log(action.from_group, 'пост не отправлен. Ошибка 917. Нет такого чата', post_link, action.to_group, chat_id);
                         return false;
                     default:
-                        console.log(action.from_group, 'пост не отправлен. Иная ошибка', post_link, action.to_group, chat_id);
+                        console.log(action.from_group, 'пост не отправлен. Иная ошибка:', error.code, error.name, post_link, action.to_group, chat_id);
                         return true;
-
                 }
             })
         }
         else {
-            console.log(action.from_group, 'пост сюда уже был отправлен', post_link, action.to_group, chat_id);
             return true;
         }
     }
