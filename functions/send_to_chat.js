@@ -24,6 +24,7 @@ module.exports = async (post_link, chat_id, action) => {
                 return true;
             }).catch(async (error) => {
                 console.log('error', error)
+                console.log('error', Object.keys(error))
                 switch (error.error_code) {
                     case 945:
                         console.log(action.from_group, 'пост не отправлен. Ошибка 945. Чат закрыт', post_link, action.to_group, chat_id);
