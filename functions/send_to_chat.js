@@ -1,4 +1,4 @@
-const VK = require('vk-io')
+const { VK } = require('vk-io');
 const check_history = require('./check_history.js');
 const add_history = require('./add_history.js');
 
