@@ -47,9 +47,8 @@ try {
 
     });
 
-
     app.listen(PORT, () => console.log('Hello, word!'));
 
 } catch (e) {
-    console.log('ебаная ошибка', e)
+    console.log('фатальная ошибка', e)
 }
