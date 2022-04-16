@@ -12,9 +12,11 @@ module.exports = async (group_id, post_type_own, post_link, post_text, actions) 
 
                     // даём заголовок посту
                     const titleIndex = post_text.indexOf('#_ ')
+                    console.log(titleIndex)
                     if (titleIndex !== -1) {
                         action.text = post_text.substring(titleIndex + 3)
                     }
+                    console.log(group_id, 'новый заголовок рассылки', action.text)
 
                     //проверка на # если нужен
                     if (post_type_own === 'official') {
