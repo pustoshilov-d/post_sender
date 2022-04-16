@@ -1,7 +1,10 @@
 {
   "name": "post_sender",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "",
+  "engines": {
+    "node": "14.x"
+  },
   "main": "app.js",
   "scripts": {
     "app": "node app.js",
