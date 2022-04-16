@@ -4,11 +4,17 @@ const send_broadcast = require('./functions/send_broadcast.js');
 
 module.exports = async (group_id, post_type_own, post_link, post_text, actions) => {
     try {
-        for (let num_action in actions){
+        for (let num_action in actions) {
             try {
                 if (actions.hasOwnProperty(num_action)) {
                     let action = actions[num_action];
                     console.log(group_id, 'работаем с действием', action.id);
+
+                    // даём заголовок посту
+                    const titleIndex = post_text.indexOf('#_ ')
+                    if (titleIndex !== -1) {
+                        action.text = post_text.substring(titleIndex + 3)
+                    }
 
                     //проверка на # если нужен
                     if (post_type_own === 'official') {
@@ -31,15 +37,15 @@ module.exports = async (group_id, post_type_own, post_link, post_text, actions) 
                             console.log(group_id, 'мод ВСЕ чаты');
                             let flag = true;
                             let chat_id = 2000000001;
-                            while (flag){
+                            while (flag) {
                                 if (chat_id !== action.except) {
-                                    flag = await send_to_chat(post_link,chat_id,action);
+                                    flag = await send_to_chat(post_link, chat_id, action);
                                     chat_id += 1;
                                     //делей
                                 }
                             }
                         } else {
-                            await send_to_chat(post_link,action.to_chat_list,action);
+                            await send_to_chat(post_link, action.to_chat_list, action);
                         }
                     }
                 }
