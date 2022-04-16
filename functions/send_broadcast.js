@@ -46,8 +46,8 @@ module.exports = async (group_id, post_link, action) => {
                 };
             }
 
-            const requestPromise = util.promisify(axios);
-            let response = await requestPromise(options);
+            let response = await axios(options);
+            console.log('broadcast res', response)
 
             await add_history(action.from_group, post_link, action.to_chat_list, action.to_group, action.action_type);
             console.log(group_id, 'рассылка отправлена. Статус', JSON.parse(response.body).response.status, post_link);

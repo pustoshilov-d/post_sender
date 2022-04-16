@@ -40,9 +40,9 @@ module.exports = async (group_id, post_type_own, post_link, post_text, actions) 
                             let chat_id = 2000000001;
                             while (flag) {
                                 if (chat_id !== action.except) {
-                                    flag = await send_to_chat(post_link, chat_id, action);
-                                    chat_id += 1;
-                                    //делей
+                                    flag = await send_to_chat(post_link, chat_id, action)
+                                    console.log('flag', flag)
+                                    chat_id += 1
                                 }
                             }
                         } else {
