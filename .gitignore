@@ -6,4 +6,5 @@ psy_sender/base_psy.xlsx
 psy_sender/test.js
 node_modules
 /node_modules
+**/node_modules
 nodemon.json
