@@ -1,26 +1,28 @@
-const api = require('vk-easy');
+import { VK } from 'vk-io';
 const check_history = require('./check_history.js');
 const add_history = require('./add_history.js');
 
-module.exports = async (post_link,chat_id,action) => {
+module.exports = async (post_link, chat_id, action) => {
     try {
-        if (await check_history(action.from_group,post_link,chat_id,action.to_group, action.action_type)){
+        const vk = new VK({
+            token: action.to_token,
+            apiVersion: "5.131"
+        });
+        if (await check_history(action.from_group, post_link, chat_id, action.to_group, action.action_type)) {
 
-            var res = await api('messages.send', {
+            var res = await vk.api.messages.send({
                 peer_id: chat_id,
-                random_id:  Math.floor(Math.random()*999999999),
+                random_id: Math.floor(Math.random() * 999999999),
                 message: action.text !== null ? action.text : "",
                 group_id: action.to_group,
-                attachment: post_link,
-                access_token: action.to_token,
-                v: "5.131"
+                attachment: post_link
             });
 
 
             console.log(action.from_group, 'результат', post_link, action.to_group, chat_id, res);
 
-            if (res.error === undefined){
-                await add_history(action.from_group,post_link,chat_id,action.to_group, action.action_type);
+            if (res.error === undefined) {
+                await add_history(action.from_group, post_link, chat_id, action.to_group, action.action_type);
                 console.log(action.from_group, 'пост отправлен', post_link, action.to_group, chat_id, res);
                 return true;
             }
@@ -37,7 +39,7 @@ module.exports = async (post_link,chat_id,action) => {
                 return false;
             }
         }
-        else{
+        else {
             console.log(action.from_group, 'пост сюда уже был отправлен', post_link, action.to_group, chat_id);
             return true;
         }
