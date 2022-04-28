@@ -24,13 +24,14 @@ module.exports = async (group_id, post_link, action) => {
                     run_now: 1
                 })
             }
-
+            console.log('flag', { options })
             axios(options).then((response) => {
                 console.log(group_id, 'рассылка отправлена. Статус', response.status, post_link);
             }).catch((error) => {
                 console.log(group_id, 'рассылка не отправлена. Статус', error.response.status, post_link);
             })
 
+            console.log('flag')
             await add_history(action.from_group, post_link, action.to_chat_list, action.to_group, action.action_type);
         }
     }
