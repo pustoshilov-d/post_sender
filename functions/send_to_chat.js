@@ -9,7 +9,7 @@ module.exports = async (post_link, chat_id, action) => {
             apiVersion: "5.131",
             apiRequestMode: 'sequential'
         });
-        if (await was_sent(action.from_group, post_link, chat_id, action.to_group, action.action_type)) {
+        if (!await was_sent(action.from_group, post_link, chat_id, action.to_group, action.action_type)) {
 
             return vk.api.messages.send({
                 peer_id: chat_id,
