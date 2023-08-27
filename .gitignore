@@ -1,9 +1,4 @@
-/keyboard_testing/
-/psy_sender/
 nodemon.json
-keyboard_testing/keyboard_testing.js
-psy_sender/base_psy.xlsx
-psy_sender/test.js
 node_modules
 /node_modules
 **/node_modules
