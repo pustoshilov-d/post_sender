@@ -9,3 +9,4 @@ node_modules
 **/node_modules
 nodemon.json
 .env
+db_dumps
